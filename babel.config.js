@@ -8,10 +8,13 @@ module.exports = function (api) {
         {
           alias: {
             "@components": "./app/components",
+            "@assets": "./assets",
             "@navigations": "./app/navigations",
             "@screens": "./app/screens",
             "@stacks": "./app/stacks",
             "@utils": "./app/utils",
+            "@services": "./app/services",
+            "@firebase": "./firebase.config",
           },
         },
       ],

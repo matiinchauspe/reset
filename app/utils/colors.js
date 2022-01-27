@@ -8,4 +8,6 @@ export default {
   // added
   green: "#00a680",
   blue: "#0ea5e9",
+  // errors
+  error: "#fb7185",
 };

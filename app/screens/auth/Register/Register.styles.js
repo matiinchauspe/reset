@@ -8,10 +8,6 @@ const styles = StyleSheet.create({
   viewContainer: {
     marginHorizontal: 40,
   },
-  divider: {
-    backgroundColor: "#00a680",
-    margin: 40,
-  },
 });
 
 export default styles;
