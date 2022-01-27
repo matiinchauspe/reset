@@ -1,54 +1,100 @@
-import React, { useState } from "react";
-import { View, TextInput as Input, Pressable, Text } from "react-native";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import { Input, Icon, Button } from 'native-base';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { useNavigation } from "@react-navigation/native";
 
-import styles from "./LoginForm.styles";
-// import Loading from "../Loading";
+import { loginRequest } from 'services/authentication.service';
+
+import styles from './LoginForm.styles';
 
 const LoginForm = () => {
+  // const app = initializeApp(firebaseConfig);
+  // const auth = getAuth(app);
+
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  // const [loading, setLoading] = useState(false);
   // const navigation = useNavigation();
 
-  const onChange = (text, type) => {
+  const onChange = ({ nativeEvent }, type) => {
+    const text = nativeEvent.text;
     setFormData({ ...formData, [type]: text });
   };
 
-  const onSubmit = () => {
-    console.log("OK!");
+  const handleOnPressIcon = () => setShowPassword(!showPassword);
+
+  const onLogin = async () => {
+    setIsLoading(true);
+
+    const user = await loginRequest(formData.email, formData.password);
+    console.log({ user });
+
+    setIsLoading(false);
   };
 
   return (
     <View style={styles.formContainer}>
-      <Input
-        placeholder="Correo electrónico"
-        style={styles.input}
-        onChangeText={(text) => onChange(text, "email")}
-        rightIcon={<Icon name="at" style={styles.iconRight} />}
-      />
+      <View style={[styles.inputContainer, styles.marginBottom5]}>
+        <Input
+          placeholder="Email"
+          InputLeftElement={
+            <Icon
+              as={<MaterialCommunityIcons name="email-outline" />}
+              size={5}
+              color="#c1c1c1"
+              ml={1}
+            />
+          }
+          h={10}
+          color="#c1c1c1"
+          _focus={{ borderColor: '#34d399' }}
+          onChange={(text) => onChange(text, 'email')}
+        />
+        {/* <Text style={styles.errorMessage}>sd</Text> */}
+      </View>
       <View style={styles.inputContainer}>
         <Input
+          type={showPassword ? 'text' : 'password'}
           placeholder="Contraseña"
-          securityTextEntry={showPassword ? false : true}
-          style={styles.input}
-          onChangeText={(text) => onChange(text, "password")}
+          InputLeftElement={
+            <Icon
+              as={<MaterialCommunityIcons name="account-lock-outline" />}
+              color="#c1c1c1"
+              size={5}
+              ml={1}
+            />
+          }
+          InputRightElement={
+            <Icon
+              as={
+                <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
+              }
+              size={5}
+              color="#c1c1c1"
+              mr={1}
+              onPress={handleOnPressIcon}
+            />
+          }
+          h={10}
+          color="#c1c1c1"
+          _focus={{ borderColor: '#34d399' }}
+          onChange={(text) => onChange(text, 'password')}
         />
-        <Icon
-          size={20}
-          name={showPassword ? "eye-off-outline" : "eye-outline"}
-          style={styles.icon}
-          onPress={() => setShowPassword(!showPassword)}
-        />
+        <Text style={styles.errorMessage}></Text>
       </View>
-      <Pressable style={styles.btn} onPress={onSubmit}>
+      <Button
+        style={styles.btn}
+        onPress={onLogin}
+        isLoading={isLoading}
+        spinnerPlacement="end"
+        size={10}
+      >
         <Text style={styles.btnText}>Iniciar sesión</Text>
-      </Pressable>
-      {/* <Loading isVisible={loading} text="Iniciando sesión" /> */}
+      </Button>
     </View>
   );
 };

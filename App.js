@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react';
+import { NativeBaseProvider } from 'native-base';
 
-import { Navigation } from "./app/stacks";
+import { Navigation } from './app/navigations';
 
-const App = () => <Navigation />;
+const App = () => (
+  <NativeBaseProvider>
+    <Navigation />
+  </NativeBaseProvider>
+);
 
 export default App;

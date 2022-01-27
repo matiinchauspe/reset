@@ -1,9 +1,9 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Colors from "@utils/colors";
+import Colors from 'utils/colors';
 
-import { Login } from "@screens/auth";
+import { Login, Register } from 'screens/auth';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +21,14 @@ const AccountStack = () => (
       name="login"
       component={Login}
       options={{
-        title: "Iniciar sesión",
+        title: 'Iniciar sesión',
+      }}
+    />
+    <Stack.Screen
+      name="register"
+      component={Register}
+      options={{
+        title: 'Registrarse',
       }}
     />
   </Stack.Navigator>

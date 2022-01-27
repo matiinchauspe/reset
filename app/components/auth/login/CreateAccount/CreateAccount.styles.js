@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-import Colors from "@utils/colors";
+import Colors from 'utils/colors';
 
 const styles = StyleSheet.create({
   textRegister: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   btnRegister: {
     color: Colors.green,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 

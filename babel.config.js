@@ -1,17 +1,20 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ["babel-preset-expo"],
+    presets: ['babel-preset-expo'],
     plugins: [
       [
-        "module-resolver",
+        'module-resolver',
         {
           alias: {
-            "@components": "./app/components",
-            "@navigations": "./app/navigations",
-            "@screens": "./app/screens",
-            "@stacks": "./app/stacks",
-            "@utils": "./app/utils",
+            components: './app/components',
+            assets: './assets',
+            navigations: './app/navigations',
+            screens: './app/screens',
+            stacks: './app/stacks',
+            utils: './app/utils',
+            services: './app/services',
+            'firebase-config': './firebase.config',
           },
         },
       ],

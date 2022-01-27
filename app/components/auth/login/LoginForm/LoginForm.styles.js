@@ -1,50 +1,43 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-import Colors from "@utils/colors";
+import Colors from 'utils/colors';
 
 const styles = StyleSheet.create({
   formContainer: {
+    flex: 1,
+    flexDirection: 'column',
     paddingVertical: 20,
     paddingHorizontal: 15,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 30,
-    backgroundColor: Colors.white,
-    borderRadius: 5,
+    borderRadius: 8,
+    backgroundColor: Colors.zircon,
+  },
+  marginBottom5: {
+    marginBottom: 10,
   },
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
   },
-  input: {
-    flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 0,
-  },
-  icon: {
-    padding: 10,
-    color: "#c1c1c1",
+  errorMessage: {
+    display: 'flex',
+    textAlign: 'left',
+    marginTop: 5,
+    marginBottom: 10,
+    color: Colors.error,
+    // height: 15,
   },
   btn: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 20,
-    fontWeight: "bold",
-    width: "100%",
-    borderRadius: 5,
-    padding: 10,
+    marginTop: 10,
+    width: '100%',
     backgroundColor: Colors.green,
   },
   btnText: {
     color: Colors.white,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 
