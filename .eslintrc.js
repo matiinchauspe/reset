@@ -1,7 +1,7 @@
 module.exports = {
   extends: 'airbnb',
   plugins: ['react', 'react-native', 'react-hooks'],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   env: {
     jest: true,
     'react-native/react-native': true,
