@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "app": ["./app/*"],
+      "components": ["./app/components/*"],
+      "assets": ["./assets/*"],
+      "navigations": ["./app/navigations"],
+      "screens": ["./app/screens"],
+      "stacks": ["./app/stacks"],
+      "utils": ["./app/utils"],
+      "services": ["./app/services"],
+      "firebase-initialize": ["./firebase.init"]
+    }
+  }
+}

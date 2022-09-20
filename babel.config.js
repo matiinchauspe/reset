@@ -14,7 +14,7 @@ module.exports = function (api) {
             stacks: './app/stacks',
             utils: './app/utils',
             services: './app/services',
-            'firebase-config': './firebase.config',
+            'firebase-initialize': './firebase.init',
           },
         },
       ],

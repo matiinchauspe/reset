@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
+    'implicit-arrow-linebreak': 'off',
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
