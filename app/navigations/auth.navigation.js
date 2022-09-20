@@ -31,6 +31,13 @@ const AccountStack = () => (
         title: 'Registrarse',
       }}
     />
+    <Stack.Screen
+      name="register"
+      component={Register}
+      options={{
+        title: 'Registrarse',
+      }}
+    />
   </Stack.Navigator>
 );
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import { Button } from 'native-base';
-import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './UserGuest.styles';

@@ -42,12 +42,7 @@ const LoginForm = () => {
         <Input
           placeholder="Email"
           InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="email-outline" />}
-              size={5}
-              color="#c1c1c1"
-              ml={1}
-            />
+            <Icon as={<MaterialCommunityIcons name="email-outline" />} size={5} color="#c1c1c1" ml={1} />
           }
           h={10}
           color="#c1c1c1"
@@ -61,18 +56,11 @@ const LoginForm = () => {
           type={showPassword ? 'text' : 'password'}
           placeholder="Contraseña"
           InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="account-lock-outline" />}
-              color="#c1c1c1"
-              size={5}
-              ml={1}
-            />
+            <Icon as={<MaterialCommunityIcons name="account-lock-outline" />} color="#c1c1c1" size={5} ml={1} />
           }
           InputRightElement={
             <Icon
-              as={
-                <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
-              }
+              as={<MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />}
               size={5}
               color="#c1c1c1"
               mr={1}
@@ -86,13 +74,7 @@ const LoginForm = () => {
         />
         <Text style={styles.errorMessage}></Text>
       </View>
-      <Button
-        style={styles.btn}
-        onPress={onLogin}
-        isLoading={isLoading}
-        spinnerPlacement="end"
-        size={10}
-      >
+      <Button style={styles.btn} onPress={onLogin} isLoading={isLoading} spinnerPlacement="end" size={10}>
         <Text style={styles.btnText}>Iniciar sesión</Text>
       </Button>
     </View>
