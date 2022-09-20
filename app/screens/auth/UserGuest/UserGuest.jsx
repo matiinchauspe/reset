@@ -9,7 +9,7 @@ const UserGuest = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView centerContent={true} style={styles.viewBody}>
+    <ScrollView centerContent style={styles.viewBody}>
       {/* <Image
         source={require("../../../assets/img/user-guest.jpg")}
         resizeMode="contain"

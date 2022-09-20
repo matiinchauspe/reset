@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
   },
   divider: {
-    backgroundColor: '#00a680',
+    backgroundColor: Colors.green,
     margin: 40,
   },
 });
