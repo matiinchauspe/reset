@@ -10,6 +10,7 @@
       "stacks": ["./app/stacks"],
       "utils": ["./app/utils"],
       "services": ["./app/services"],
+      "context": ["./app/context"],
       "firebase-initialize": ["./firebase.init"]
     }
   }

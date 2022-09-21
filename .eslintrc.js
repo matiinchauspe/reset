@@ -28,6 +28,8 @@ module.exports = {
     'react-native/no-raw-text': 2,
     'react-native/no-single-element-style-arrays': 2,
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+    'consistent-return': 0,
+    'object-curly-newline': 0,
   },
   globals: {
     fetch: false,

@@ -1,35 +1,43 @@
-// eslint-disable-next-line no-unused-vars
-import { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useMemo, useCallback } from 'react';
 
 import { auth } from 'firebase-initialize';
 import { AuthService } from 'services';
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-/* eslint-disable */ // TODO: remove later
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
+  // const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSignIn = (email, password) => AuthService.loginRequest(email, password);
+  const handleSignIn = async (email, password) => {
+    setLoading(true);
+    const { error: userError } = await AuthService.loginRequest(email, password);
+    debugger; // eslint-disable-line
+    setLoading(false);
+
+    return setError(userError);
+  };
 
   const handleSignOut = () => AuthService.logoutRequest();
 
   const handleSignUp = (email, data) => AuthService.registerRequest(email, data);
 
-  const getUser = () => auth.currentUser;
+  const getUser = useCallback(() => auth.currentUser, []);
 
-  return (
-    <AuthContext.Provider
-      value={{
-        onSignIn: handleSignIn,
-        onSignOut: handleSignOut,
-        onSignUp: handleSignUp,
-        user: getUser,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const valueToProvider = useMemo(
+    () => ({
+      onSignIn: handleSignIn,
+      onSignOut: handleSignOut,
+      onSignUp: handleSignUp,
+      user: getUser,
+      error,
+      loading,
+    }),
+    [getUser, error, loading]
   );
+
+  return <AuthContext.Provider value={valueToProvider}>{children}</AuthContext.Provider>;
 };
+
+export const useAuth = () => useContext(AuthContext);

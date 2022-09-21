@@ -1,11 +1,14 @@
 import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 
+import { AuthProvider } from 'context';
 import { Navigation } from './app/navigations';
 
 const App = () => (
   <NativeBaseProvider>
-    <Navigation />
+    <AuthProvider>
+      <Navigation />
+    </AuthProvider>
   </NativeBaseProvider>
 );
 

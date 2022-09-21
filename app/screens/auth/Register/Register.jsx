@@ -10,7 +10,7 @@ import styles from './Register.styles';
 const Register = () => (
   <ScrollView style={styles.container}>
     <Logo />
-    <View style={[styles.viewContainer]}>
+    <View style={styles.viewContainer}>
       <RegisterForm />
     </View>
   </ScrollView>

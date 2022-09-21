@@ -14,6 +14,7 @@ module.exports = function (api) {
             stacks: './app/stacks',
             utils: './app/utils',
             services: './app/services',
+            context: './app/context',
             'firebase-initialize': './firebase.init',
           },
         },
@@ -29,6 +30,7 @@ module.exports = function (api) {
           allowUndefined: true,
         },
       ],
+      ['@babel/plugin-proposal-export-namespace-from'],
     ],
   };
 };
