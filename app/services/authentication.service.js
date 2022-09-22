@@ -1,12 +1,23 @@
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth';
 
 import { auth } from 'firebase-initialize';
 import errorMessages from 'utils/errors';
 
+// @handlers
+const onAuthStateInit = () =>
+  new Promise((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      resolve(Boolean(user));
+    });
+  });
+
 const loginRequest = (email, password) =>
   signInWithEmailAndPassword(auth, email, password)
     .then((userData) => {
-      console.log(userData);
       return {
         data: userData,
         error: null,
@@ -28,4 +39,4 @@ const logoutRequest = () => auth.signOut();
 const registerRequest = ({ password, ...userData }) =>
   createUserWithEmailAndPassword(auth, password);
 
-export { loginRequest, logoutRequest, registerRequest };
+export { loginRequest, logoutRequest, registerRequest, onAuthStateInit };

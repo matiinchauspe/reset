@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useMemo, useCallback } from 'react';
+import React, { createContext, useState, useEffect, useContext, useMemo, useCallback } from 'react';
 
 import { auth } from 'firebase-initialize';
 import { AuthService } from 'services';
@@ -6,17 +6,12 @@ import { AuthService } from 'services';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [hasUserLogged, setHasUserLogged] = useState(null);
 
   const handleSignIn = async (email, password) => {
-    setLoading(true);
-    const { error: userError } = await AuthService.loginRequest(email, password);
-    debugger; // eslint-disable-line
-    setLoading(false);
+    const { data, error } = await AuthService.loginRequest(email, password);
 
-    return setError(userError);
+    return { data, error };
   };
 
   const handleSignOut = () => AuthService.logoutRequest();
@@ -31,11 +26,19 @@ export const AuthProvider = ({ children }) => {
       onSignOut: handleSignOut,
       onSignUp: handleSignUp,
       user: getUser,
-      error,
-      loading,
+      hasUserLogged,
     }),
-    [getUser, error, loading]
+    [getUser, hasUserLogged]
   );
+
+  const checkUserLogged = async () => {
+    const isUserLogged = await AuthService.onAuthStateInit();
+    setHasUserLogged(isUserLogged);
+  };
+
+  useEffect(() => {
+    checkUserLogged();
+  }, []);
 
   return <AuthContext.Provider value={valueToProvider}>{children}</AuthContext.Provider>;
 };

@@ -2,6 +2,13 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
+/* NOTE: This is to prevent the next error:
+-> "AsyncStorage will be removed from react-native core in the future release. It should be
+ - installed and imported from '@react-native-async-storage/async-storage' instead of
+ - 'react-native'." */
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getReactNativePersistence, initializeAuth } from 'firebase/auth/react-native';
+
 import {
   FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN,
@@ -25,5 +32,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+/* NOTE: This is to prevent the next error:
+-> "AsyncStorage will be removed from react-native core in the future release. It should be
+ - installed and imported from '@react-native-async-storage/async-storage' instead of
+ - 'react-native'." */
+initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
 
 export const auth = getAuth(app);

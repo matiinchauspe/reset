@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Colors from 'utils/colors';
 
-import { Login, Register } from 'screens/auth';
+import { Account, Login, Register } from 'screens/auth';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +17,7 @@ const AccountStack = () => (
       headerTintColor: Colors.white,
     }}
   >
+    <Stack.Screen name="account" component={Account} options={{ title: 'Mi cuenta' }} />
     <Stack.Screen
       name="login"
       component={Login}

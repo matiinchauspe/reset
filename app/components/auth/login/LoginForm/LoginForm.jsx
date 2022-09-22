@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { Input, Icon, Button } from 'native-base';
+import { Input, Icon, Button, useToast } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import { useNavigation } from "@react-navigation/native";
 
-// import { loginRequest } from 'services/authentication.service';
 import { useAuth } from 'context';
-
+import { Toast } from 'components/shared';
 import styles from './LoginForm.styles';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  const { onSignIn, loading } = useAuth();
-  // const navigation = useNavigation();
+  const { onSignIn } = useAuth();
+  const toast = useToast();
 
   const onChange = ({ nativeEvent }, type) => {
     const { text } = nativeEvent;
@@ -27,14 +25,16 @@ const LoginForm = () => {
   const handleOnPressIcon = () => setShowPassword(!showPassword);
 
   const handleLogin = async () => {
-    debugger; // eslint-disable-line
-    // const auth = useAuth();
-    // setIsLoading(true);
+    setLoading(true);
+    const { error } = await onSignIn(formData.email, formData.password);
+    setLoading(false);
 
-    const { data: user } = await onSignIn(formData.email, formData.password);
-    console.log({ user });
-
-    // setIsLoading(false);
+    if (error) {
+      toast.show({
+        placement: 'top',
+        render: () => <Toast message={error.message} type="error" />,
+      });
+    }
   };
 
   return (

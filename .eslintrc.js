@@ -30,6 +30,7 @@ module.exports = {
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
     'consistent-return': 0,
     'object-curly-newline': 0,
+    'no-unused-vars': 'warn',
   },
   globals: {
     fetch: false,
