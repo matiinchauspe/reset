@@ -7,13 +7,15 @@ import { UserGuest } from './UserGuest';
 import { UserLogged } from './UserLogged';
 
 const Account = () => {
-  const { hasUserLogged } = useAuth();
+  const { hasUserLogged, getUser } = useAuth();
+  const user = getUser();
 
+  // NOTE: analyze this later -> "hasUserLogged" objective
   if (hasUserLogged === null) {
     return <LoadingSection />;
   }
 
-  return hasUserLogged ? <UserLogged /> : <UserGuest />;
+  return user ? <UserLogged /> : <UserGuest />;
 };
 
 export default Account;

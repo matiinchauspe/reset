@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Input, Icon, Button, useToast } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from 'context';
 import { Toast } from 'components/shared';
@@ -16,6 +17,7 @@ const LoginForm = () => {
   });
   const { onSignIn } = useAuth();
   const toast = useToast();
+  const navigation = useNavigation();
 
   const onChange = ({ nativeEvent }, type) => {
     const { text } = nativeEvent;
@@ -29,12 +31,14 @@ const LoginForm = () => {
     const { error } = await onSignIn(formData.email, formData.password);
     setLoading(false);
 
-    if (error) {
-      toast.show({
-        placement: 'top',
-        render: () => <Toast message={error.message} type="error" />,
-      });
+    if (!error) {
+      return navigation.navigate('account');
     }
+
+    toast.show({
+      placement: 'top',
+      render: () => <Toast message={error.message} type="error" />,
+    });
   };
 
   return (

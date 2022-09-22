@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
-// import { useNavigation } from "@react-navigation/native";
+import { View, ScrollView } from 'native-base';
 
 import { RegisterForm } from 'components/auth/register';
 import { Logo } from 'components/auth/Logo';
 
-import styles from './Register.styles';
+import Colors from 'utils/colors';
 
 const Register = () => (
-  <ScrollView style={styles.container}>
+  <ScrollView bgColor={Colors.charade}>
     <Logo />
-    <View style={styles.viewContainer}>
+    <View my={40}>
       <RegisterForm />
     </View>
   </ScrollView>

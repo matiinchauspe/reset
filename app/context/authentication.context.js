@@ -7,14 +7,23 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [hasUserLogged, setHasUserLogged] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSignIn = async (email, password) => {
+    setLoading(true);
     const { data, error } = await AuthService.loginRequest(email, password);
+    setLoading(false);
 
     return { data, error };
   };
 
-  const handleSignOut = () => AuthService.logoutRequest();
+  const handleSignOut = async () => {
+    setLoading(true);
+    const { data, error } = await AuthService.logoutRequest();
+    setLoading(false);
+
+    return { data, error };
+  };
 
   const handleSignUp = (email, data) => AuthService.registerRequest(email, data);
 
@@ -25,10 +34,11 @@ export const AuthProvider = ({ children }) => {
       onSignIn: handleSignIn,
       onSignOut: handleSignOut,
       onSignUp: handleSignUp,
-      user: getUser,
+      getUser,
       hasUserLogged,
+      loading,
     }),
-    [getUser, hasUserLogged]
+    [getUser, hasUserLogged, loading]
   );
 
   const checkUserLogged = async () => {
@@ -37,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    checkUserLogged();
+    return checkUserLogged();
   }, []);
 
   return <AuthContext.Provider value={valueToProvider}>{children}</AuthContext.Provider>;

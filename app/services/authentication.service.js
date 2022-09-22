@@ -1,3 +1,5 @@
+// @Firebase authentication service
+
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -5,7 +7,7 @@ import {
 } from 'firebase/auth';
 
 import { auth } from 'firebase-initialize';
-import errorMessages from 'utils/errors';
+import errorFactory from 'utils/errors/responseFactory';
 
 // @handlers
 const onAuthStateInit = () =>
@@ -26,14 +28,25 @@ const loginRequest = (email, password) =>
     .catch((error) => {
       return {
         data: null,
-        error: {
-          code: error.code,
-          message: errorMessages[error.code],
-        },
+        error: errorFactory({ errorCode: error.code }),
       };
     });
 
-const logoutRequest = () => auth.signOut();
+const logoutRequest = () =>
+  auth
+    .signOut()
+    .then(() => {
+      return {
+        data: null,
+        error: null,
+      };
+    })
+    .catch((error) => {
+      return {
+        data: null,
+        error: errorFactory({ errorCode: error.code }),
+      };
+    });
 
 // eslint-disable-next-line no-unused-vars
 const registerRequest = ({ password, ...userData }) =>
