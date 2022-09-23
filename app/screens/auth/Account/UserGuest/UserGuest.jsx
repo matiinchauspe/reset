@@ -1,31 +1,35 @@
 import React from 'react';
-import { View, ScrollView, Text } from 'react-native';
-import { Button } from 'native-base';
+import { View, Center, Button, Box, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
-import styles from './UserGuest.styles';
+import Colors from 'utils//colors';
+import { Logo } from 'components/auth/Logo';
 
 const UserGuest = () => {
   const navigation = useNavigation();
 
+  const goToProfile = () => navigation.navigate('login');
+
   return (
-    <ScrollView centerContent style={styles.viewBody}>
-      {/* <Image
-        source={require("../../../assets/img/user-guest.jpg")}
-        resizeMode="contain"
-        style={styles.image}
-      /> */}
-      <Text style={styles.title}>Consulta tu perfil de reset</Text>
-      <Text style={styles.description}>Mira acerca de los planes que poder seguir y más.</Text>
-      <View style={styles.viewBtn}>
-        <Button
-          buttonStyle={styles.btnStyle}
-          containerStyle={styles.btnContainer}
-          title="Ver tu perfil"
-          onPress={() => navigation.navigate('login')}
-        />
-      </View>
-    </ScrollView>
+    <View height="100%" backgroundColor={Colors.zircon}>
+      <Center>
+        <Logo />
+        <Text fontSize={19} mt={10} mb={5} bold color="emerald.500">
+          Consulta tu perfil de Reset
+        </Text>
+
+        <Text bold color="red.300">
+          Mira acerca de los planes que poder seguir y más.
+        </Text>
+        <Box w="1/2" mt={5}>
+          <Button bgColor={Colors.carmine} onPress={goToProfile}>
+            <Text color="white" bold>
+              Ver mi perfil
+            </Text>
+          </Button>
+        </Box>
+      </Center>
+    </View>
   );
 };
 

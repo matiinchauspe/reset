@@ -1,19 +1,21 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
-// import { useNavigation } from "@react-navigation/native";
+import { View, ScrollView } from 'native-base';
 
-import { LoginForm, CreateAccount, SocialMedia } from 'components/auth/login';
+import { GoToRegisterOrLogin } from 'components/auth/GoToRegisterOrLogin';
+import { LoginForm, SocialMedia } from 'components/auth/login';
 import { Logo } from 'components/auth/Logo';
 import { Divider } from 'components/shared';
+
+import Colors from 'utils/colors';
 
 import styles from './Login.styles';
 
 const Login = () => (
-  <ScrollView style={styles.container}>
+  <ScrollView bgColor={Colors.zircon}>
     <Logo />
     <View style={styles.viewContainer}>
       <LoginForm />
-      <CreateAccount />
+      <GoToRegisterOrLogin goTo="register" />
     </View>
     <Divider />
     <View style={styles.viewContainer}>

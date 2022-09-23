@@ -15,6 +15,7 @@ module.exports = function (api) {
             utils: './app/utils',
             services: './app/services',
             context: './app/context',
+            queries: './app/queries',
             'firebase-initialize': './firebase.init',
           },
         },

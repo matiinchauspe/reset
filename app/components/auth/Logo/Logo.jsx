@@ -1,15 +1,13 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image } from 'native-base';
+import { Asset } from 'expo-asset';
 
-import styles from './Logo.styles';
+// TODO: User Guest image would be here
+const imageURI = Asset.fromModule(require('assets/img/logo.png'));
 
 const Logo = () => (
   <View>
-    <Image
-      source={require('../../../../assets/img/logo.png')}
-      resizeMode="cover"
-      style={[styles.logo, styles.marginTop20]}
-    />
+    <Image source={imageURI} resizeMode="cover" h={250} alt="Reset logo" />
   </View>
 );
 

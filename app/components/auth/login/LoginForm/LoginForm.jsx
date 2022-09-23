@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { Input, Icon, Button, useToast } from 'native-base';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Text, Input, Icon, Button, useToast } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useAuth } from 'context';
 import { Toast } from 'components/shared';
-import styles from './LoginForm.styles';
+
+import Colors from 'utils/colors';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,8 +42,8 @@ const LoginForm = () => {
   };
 
   return (
-    <View style={styles.formContainer}>
-      <View style={[styles.inputContainer, styles.marginBottom5]}>
+    <View mt={30}>
+      <View mb={3}>
         <Input
           placeholder="Email"
           InputLeftElement={
@@ -62,7 +62,7 @@ const LoginForm = () => {
         />
         {/* <Text style={styles.errorMessage}>sd</Text> */}
       </View>
-      <View style={styles.inputContainer}>
+      <View>
         <Input
           type={showPassword ? 'text' : 'password'}
           placeholder="Contraseña"
@@ -92,16 +92,18 @@ const LoginForm = () => {
           _focus={{ borderColor: '#34d399' }}
           onChange={(text) => onChange(text, 'password')}
         />
-        <Text style={styles.errorMessage} />
       </View>
       <Button
-        style={styles.btn}
+        mt={10}
+        mb={1}
+        w="100%"
+        bgColor={Colors.green}
         onPress={handleLogin}
         isLoading={loading}
-        spinnerPlacement="end"
-        size={10}
       >
-        <Text style={styles.btnText}>Iniciar sesión</Text>
+        <Text color="white" bold>
+          Iniciar sesión
+        </Text>
       </Button>
     </View>
   );

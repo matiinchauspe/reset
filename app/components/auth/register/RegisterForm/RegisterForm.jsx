@@ -1,38 +1,46 @@
-import React, { useState } from "react";
-import { View, Pressable, Text } from "react-native";
-import { Input, Icon } from "native-base";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { View, Input, Icon, Button, Text } from 'native-base';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { useNavigation } from "@react-navigation/native";
 
-import styles from "./RegisterForm.styles";
-// import Loading from "../Loading";
+import Colors from 'utils/colors';
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordRepeated, setShowPasswordRepeated] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    name: "",
-    password: "",
-    "password-repeat": "",
+    email: '',
+    name: '',
+    password: '',
+    'password-repeat': '',
   });
   // const [loading, setLoading] = useState(false);
   // const navigation = useNavigation();
 
   const onChange = ({ nativeEvent }, type) => {
-    const text = nativeEvent.text;
+    const { text } = nativeEvent;
     setFormData({ ...formData, [type]: text });
   };
 
-  const onRegister = () => {
-    console.log("OK!");
+  const handleOnPressIcon = (type) => () => {
+    if (type === 'password') {
+      return setShowPassword(!showPassword);
+    }
+
+    setShowPasswordRepeated(!showPasswordRepeated);
+  };
+
+  const handleRegister = () => {
+    console.log('OK!');
   };
 
   return (
-    <View style={styles.formContainer}>
-      <View style={[styles.inputContainer, styles.marginBottom5]}>
+    <View mt={30}>
+      <View mb={3}>
         <Input
           placeholder="Email"
           InputLeftElement={
+            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="email-outline" />}
               size={5}
@@ -42,14 +50,15 @@ const RegisterForm = () => {
           }
           h={10}
           color="#c1c1c1"
-          _focus={{ borderColor: "#34d399" }}
-          onChange={(text) => onChange(text, "email")}
+          _focus={{ borderColor: '#34d399' }}
+          onChange={(text) => onChange(text, 'email')}
         />
       </View>
-      <View style={[styles.inputContainer, styles.marginBottom5]}>
+      <View mb={3}>
         <Input
           placeholder="Nombre y apellido"
           InputLeftElement={
+            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="account-circle-outline" />}
               size={5}
@@ -59,16 +68,17 @@ const RegisterForm = () => {
           }
           h={10}
           color="#c1c1c1"
-          _focus={{ borderColor: "#34d399" }}
-          onChange={(text) => onChange(text, "name")}
+          _focus={{ borderColor: '#34d399' }}
+          onChange={(text) => onChange(text, 'name')}
         />
       </View>
-      <View style={[styles.inputContainer, styles.marginBottom5]}>
+      <View mb={3}>
         <Input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           placeholder="Contraseña"
           textContentType="oneTimeCode"
           InputLeftElement={
+            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="account-lock-outline" />}
               color="#c1c1c1"
@@ -76,18 +86,31 @@ const RegisterForm = () => {
               ml={1}
             />
           }
+          InputRightElement={
+            // eslint-disable-next-line react/jsx-wrap-multilines
+            <Icon
+              as={
+                <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
+              }
+              size={5}
+              color="#c1c1c1"
+              mr={1}
+              onPress={handleOnPressIcon('password')}
+            />
+          }
           h={10}
           color="#c1c1c1"
-          _focus={{ borderColor: "#34d399" }}
-          onChange={(text) => onChange(text, "password")}
+          _focus={{ borderColor: '#34d399' }}
+          onChange={(text) => onChange(text, 'password')}
         />
       </View>
-      <View style={styles.inputContainer}>
+      <View>
         <Input
-          type="password"
+          type={showPasswordRepeated ? 'text' : 'password'}
           placeholder="Repetir contraseña"
           textContentType="oneTimeCode"
           InputLeftElement={
+            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="account-lock-outline" />}
               color="#c1c1c1"
@@ -95,15 +118,32 @@ const RegisterForm = () => {
               ml={1}
             />
           }
+          InputRightElement={
+            // eslint-disable-next-line react/jsx-wrap-multilines
+            <Icon
+              as={
+                // eslint-disable-next-line react/jsx-wrap-multilines
+                <MaterialCommunityIcons
+                  name={showPasswordRepeated ? 'eye-off-outline' : 'eye-outline'}
+                />
+              }
+              size={5}
+              color="#c1c1c1"
+              mr={1}
+              onPress={handleOnPressIcon('passwordRepeated')}
+            />
+          }
           h={10}
           color="#c1c1c1"
-          _focus={{ borderColor: "#34d399" }}
-          onChange={(text) => onChange(text, "password-repeat")}
+          _focus={{ borderColor: '#34d399' }}
+          onChange={(text) => onChange(text, 'password-repeat')}
         />
       </View>
-      <Pressable style={styles.btn} onPress={onRegister}>
-        <Text style={styles.btnText}>Registrarse</Text>
-      </Pressable>
+      <Button w="100%" mt={10} mb={1} color="white" bgColor={Colors.green} onPress={handleRegister}>
+        <Text color="white" bold>
+          Registrarse
+        </Text>
+      </Button>
     </View>
   );
 };

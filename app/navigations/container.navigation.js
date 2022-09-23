@@ -4,8 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 import Colors from 'utils/colors';
-import AuthNavigation from './auth.navigation';
+
+import HomeNavigation from './home.navigation';
 import ResetNavigation from './reset.navigation';
+import AuthNavigation from './auth.navigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,17 +15,20 @@ const screenOptions = (route, color) => {
   let iconName;
 
   switch (route.name) {
-    case 'auth':
-      iconName = 'account-circle';
-      break;
     case 'home':
       iconName = 'home';
+      break;
+    case 'reset':
+      iconName = 'weight-lifter';
+      break;
+    case 'auth':
+      iconName = 'account-circle';
       break;
     default:
       break;
   }
 
-  return <Icon name={iconName} size={22} color={color} />;
+  return <Icon name={iconName} size={28} color={color} />;
 };
 
 const Navigation = () => (
@@ -41,11 +46,20 @@ const Navigation = () => (
           borderTopColor: Colors.blackPearl,
           backgroundColor: Colors.blackPearl,
         },
-        tabBarActiveTintColor: Colors.white,
+        tabBarActiveTintColor: Colors.green,
         tabBarInactiveTintColor: Colors.zircon,
       })}
     >
-      <Tab.Screen name="reset" component={ResetNavigation} options={{ headerShown: false }} />
+      <Tab.Screen
+        name="home"
+        component={HomeNavigation}
+        options={{ title: 'Inicio', headerShown: false }}
+      />
+      <Tab.Screen
+        name="reset"
+        component={ResetNavigation}
+        options={{ title: 'Reset', headerShown: false }}
+      />
       <Tab.Screen
         name="auth"
         component={AuthNavigation}

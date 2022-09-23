@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 /* NOTE: This is to prevent the next error:
 -> "AsyncStorage will be removed from react-native core in the future release. It should be
@@ -41,4 +42,8 @@ initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
 
+// Initialize Firebase Auth
 export const auth = getAuth(app);
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);
