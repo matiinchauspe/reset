@@ -14,11 +14,7 @@ const GoToRegisterOrLogin = ({ goTo }) => {
     <Text mt="15px" color="white" ml="10px" mr="10px">
       {goTo === 'register' && 'Aún no tienes una cuenta?'}
       {goTo === 'login' && 'Ya tienes cuenta?'} {/*eslint-disable-line */}
-      <Text
-        color={Colors.green}
-        bold
-        onPress={goToSection(goTo === 'register' ? 'register' : 'login')}
-      >
+      <Text color={Colors.green} onPress={goToSection(goTo === 'register' ? 'register' : 'login')}>
         {goTo === 'register' && 'Regístrate'}
         {goTo === 'login' && 'Iniciar sesión'}
       </Text>

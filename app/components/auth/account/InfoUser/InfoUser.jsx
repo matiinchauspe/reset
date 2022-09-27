@@ -5,7 +5,7 @@ import Colors from 'utils/colors';
 
 const InfoUser = ({ userInfo: { uid, displayName, email, photoURL } }) => {
   return (
-    <View bgColor={Colors.charade} my={40}>
+    <View bgColor={Colors.charade} my={45}>
       <Text color="amber.100">Info User</Text>
     </View>
   );
