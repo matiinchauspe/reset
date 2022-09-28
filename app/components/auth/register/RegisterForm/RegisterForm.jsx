@@ -12,6 +12,7 @@ import Colors from 'utils/colors';
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRepeated, setShowPasswordRepeated] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -21,8 +22,6 @@ const RegisterForm = () => {
   const { onSignUp } = useAuth();
   const toast = useToast();
   const navigation = useNavigation();
-  // const [loading, setLoading] = useState(false);
-  // const navigation = useNavigation();
 
   const onChange = ({ nativeEvent }, type) => {
     const { text } = nativeEvent;
@@ -38,14 +37,17 @@ const RegisterForm = () => {
   };
 
   const handleRegister = async () => {
+    setLoading(true);
     const { error } = await onSignUp(formData);
-    debugger; // eslint-disable-line
+    setLoading(false);
+
     if (!error) {
       toast.show({
         placement: 'top',
-        render: () => <Toast message="Creado exitosamente" type="success" />,
+        render: () => <Toast message="Usuario creado exitosamente" type="success" />,
       });
-      return navigation.navigate('account');
+
+      return navigation.navigate('login');
     }
 
     toast.show({
@@ -152,7 +154,15 @@ const RegisterForm = () => {
           onChange={(text) => onChange(text, 'passwordRepeated')}
         />
       </View>
-      <Button w="100%" mt={10} mb={1} color="white" bgColor={Colors.green} onPress={handleRegister}>
+      <Button
+        w="100%"
+        mt={10}
+        mb={1}
+        color="white"
+        bgColor={Colors.green}
+        isLoading={loading}
+        onPress={handleRegister}
+      >
         <Text color="white" bold>
           Registrarse
         </Text>

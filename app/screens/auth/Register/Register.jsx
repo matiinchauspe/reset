@@ -2,9 +2,8 @@ import React from 'react';
 import { View, ScrollView } from 'native-base';
 
 import Colors from 'utils/colors';
-import { GoToRegisterOrLogin } from 'components/auth/GoToRegisterOrLogin';
 import { RegisterForm } from 'components/auth/register';
-import { Logo } from 'components/auth/Logo';
+import { Logo, LinkIntoText } from 'components/shared';
 
 import styles from './Register.styles';
 
@@ -13,7 +12,7 @@ const Register = () => (
     <Logo />
     <View style={styles.formContainer}>
       <RegisterForm />
-      <GoToRegisterOrLogin goTo="login" />
+      <LinkIntoText text="Ya tienes cuenta?" linkText="Iniciar sesión" sectionToGo="login" />
     </View>
   </ScrollView>
 );

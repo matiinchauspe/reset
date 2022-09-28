@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, ScrollView } from 'native-base';
 
-import { GoToRegisterOrLogin } from 'components/auth/GoToRegisterOrLogin';
 import { LoginForm, SocialMedia } from 'components/auth/login';
-import { Logo } from 'components/auth/Logo';
-import { Divider } from 'components/shared';
+import { Divider, Logo, LinkIntoText } from 'components/shared';
 
 import Colors from 'utils/colors';
 
@@ -15,7 +13,7 @@ const Login = () => (
     <Logo />
     <View style={styles.viewContainer}>
       <LoginForm />
-      <GoToRegisterOrLogin goTo="register" />
+      <LinkIntoText text="Aún no tienes una cuenta?" linkText="Regístrate" sectionToGo="register" />
     </View>
     <Divider />
     <View style={styles.viewContainer}>

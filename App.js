@@ -4,7 +4,7 @@ import { NativeBaseProvider, Box } from 'native-base';
 import { AuthProvider } from 'context';
 import { usePreloadResources } from 'hooks';
 import { theme } from 'utils/styles';
-import { Navigation } from './app/navigations';
+import Navigation from './app/navigations';
 
 const App = () => {
   const { onLayoutRootView, prepared } = usePreloadResources();
