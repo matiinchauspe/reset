@@ -1,7 +1,11 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React, { useState } from 'react';
-import { View, Input, Icon, Button, Text } from 'native-base';
+import { View, Input, Icon, Button, Text, useToast } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
+
+import { useAuth } from 'context';
+import { Toast } from 'components/shared';
 
 import Colors from 'utils/colors';
 
@@ -12,8 +16,11 @@ const RegisterForm = () => {
     email: '',
     name: '',
     password: '',
-    'password-repeat': '',
+    passwordRepeated: '',
   });
+  const { onSignUp } = useAuth();
+  const toast = useToast();
+  const navigation = useNavigation();
   // const [loading, setLoading] = useState(false);
   // const navigation = useNavigation();
 
@@ -30,8 +37,21 @@ const RegisterForm = () => {
     setShowPasswordRepeated(!showPasswordRepeated);
   };
 
-  const handleRegister = () => {
-    console.log('OK!');
+  const handleRegister = async () => {
+    const { error } = await onSignUp(formData);
+    debugger; // eslint-disable-line
+    if (!error) {
+      toast.show({
+        placement: 'top',
+        render: () => <Toast message="Creado exitosamente" type="success" />,
+      });
+      return navigation.navigate('account');
+    }
+
+    toast.show({
+      placement: 'top',
+      render: () => <Toast message={error.message} type="error" />,
+    });
   };
 
   return (
@@ -40,7 +60,6 @@ const RegisterForm = () => {
         <Input
           placeholder="Email"
           InputLeftElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="email-outline" />}
               size={5}
@@ -58,7 +77,6 @@ const RegisterForm = () => {
         <Input
           placeholder="Nombre y apellido"
           InputLeftElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="account-circle-outline" />}
               size={5}
@@ -78,7 +96,6 @@ const RegisterForm = () => {
           placeholder="Contraseña"
           textContentType="oneTimeCode"
           InputLeftElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="account-lock-outline" />}
               color="#c1c1c1"
@@ -87,7 +104,6 @@ const RegisterForm = () => {
             />
           }
           InputRightElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={
                 <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
@@ -110,7 +126,6 @@ const RegisterForm = () => {
           placeholder="Repetir contraseña"
           textContentType="oneTimeCode"
           InputLeftElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="account-lock-outline" />}
               color="#c1c1c1"
@@ -119,10 +134,8 @@ const RegisterForm = () => {
             />
           }
           InputRightElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={
-                // eslint-disable-next-line react/jsx-wrap-multilines
                 <MaterialCommunityIcons
                   name={showPasswordRepeated ? 'eye-off-outline' : 'eye-outline'}
                 />
@@ -136,7 +149,7 @@ const RegisterForm = () => {
           h={10}
           color="#c1c1c1"
           _focus={{ borderColor: '#34d399' }}
-          onChange={(text) => onChange(text, 'password-repeat')}
+          onChange={(text) => onChange(text, 'passwordRepeated')}
         />
       </View>
       <Button w="100%" mt={10} mb={1} color="white" bgColor={Colors.green} onPress={handleRegister}>

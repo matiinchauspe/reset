@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext, useMemo, useCallback } from 'react';
 
 import { auth } from 'firebase-initialize';
-import { AuthService } from 'services';
+import { AccountService } from 'services';
 
 const AuthContext = createContext();
 
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignIn = async (email, password) => {
     setLoading(true);
-    const { data, error } = await AuthService.loginRequest(email, password);
+    const { data, error } = await AccountService.loginRequest(email, password);
     setLoading(false);
 
     return { data, error };
@@ -19,13 +19,15 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignOut = async () => {
     setLoading(true);
-    const { data, error } = await AuthService.logoutRequest();
+    await AccountService.logoutRequest();
     setLoading(false);
-
-    return { data, error };
   };
 
-  const handleSignUp = (email, data) => AuthService.registerRequest(email, data);
+  const handleSignUp = async (userData) => {
+    const { data, error } = await AccountService.registerRequest(userData);
+    debugger; // eslint-disable-line
+    return { data, error };
+  };
 
   const getUser = useCallback(() => auth.currentUser, []);
 
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   );
 
   const checkUserLogged = async () => {
-    const isUserLogged = await AuthService.onAuthStateInit();
+    const isUserLogged = await AccountService.onAuthStateInit();
     setHasUserLogged(isUserLogged);
   };
 

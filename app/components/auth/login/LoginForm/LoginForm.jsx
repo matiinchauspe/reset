@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React, { useState } from 'react';
 import { View, Text, Input, Icon, Button, useToast } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
@@ -47,7 +48,6 @@ const LoginForm = () => {
         <Input
           placeholder="Email"
           InputLeftElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="email-outline" />}
               size={5}
@@ -67,7 +67,6 @@ const LoginForm = () => {
           type={showPassword ? 'text' : 'password'}
           placeholder="Contraseña"
           InputLeftElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={<MaterialCommunityIcons name="account-lock-outline" />}
               color="#c1c1c1"
@@ -76,7 +75,6 @@ const LoginForm = () => {
             />
           }
           InputRightElement={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <Icon
               as={
                 <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
