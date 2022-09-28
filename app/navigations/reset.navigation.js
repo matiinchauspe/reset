@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Colors from 'utils/colors';
 
-import { ResetScreen as Reset } from 'screens/Reset';
+import { Reset } from 'screens/reset';
 
 const Stack = createNativeStackNavigator();
 

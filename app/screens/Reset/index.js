@@ -1,1 +1,1 @@
-export { default as ResetScreen } from './Reset';
+export * from './Reset';

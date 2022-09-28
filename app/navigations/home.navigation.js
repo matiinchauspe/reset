@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Colors from 'utils/colors';
 
-import { HomeScreen as Home } from 'screens/Home';
+import { Home } from 'screens/home';
 
 const Stack = createNativeStackNavigator();
 
