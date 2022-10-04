@@ -1,10 +1,5 @@
 // @Firebase authentication service
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 // TODO: remove this from here later
 import { collection, doc, setDoc } from 'firebase/firestore';
 
@@ -13,13 +8,6 @@ import errorFactory from 'utils/errors/responseFactory';
 // import * as AccountTransform from './account.transform';
 
 // @handlers
-const onAuthStateInit = () =>
-  new Promise((resolve) => {
-    onAuthStateChanged(auth, (user) => {
-      resolve(Boolean(user));
-    });
-  });
-
 const loginRequest = async (email, password) => {
   try {
     const userData = await signInWithEmailAndPassword(auth, email, password);
@@ -49,4 +37,4 @@ const registerRequest = async ({ email, passwordRepeated: password, ...restUserD
   }
 };
 
-export { loginRequest, logoutRequest, registerRequest, onAuthStateInit };
+export { loginRequest, logoutRequest, registerRequest };

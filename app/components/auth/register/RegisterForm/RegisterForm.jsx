@@ -12,14 +12,13 @@ import Colors from 'utils/colors';
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRepeated, setShowPasswordRepeated] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     name: '',
     password: '',
     passwordRepeated: '',
   });
-  const { onSignUp } = useAuth();
+  const { onSignUp, loading } = useAuth();
   const toast = useToast();
   const navigation = useNavigation();
 
@@ -37,13 +36,11 @@ const RegisterForm = () => {
   };
 
   const handleRegister = async () => {
-    setLoading(true);
     const { error } = await onSignUp(formData);
-    setLoading(false);
-
     if (!error) {
       toast.show({
         placement: 'top',
+        // TODO: move this to traduced messages later
         render: () => <Toast message="Usuario creado exitosamente" type="success" />,
       });
 

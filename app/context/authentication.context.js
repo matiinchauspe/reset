@@ -1,12 +1,14 @@
 import React, { createContext, useState, useEffect, useContext, useMemo, useCallback } from 'react';
+import { collection, doc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
-import { auth } from 'firebase-initialize';
+import { auth, db } from 'firebase-initialize';
 import { AccountService } from 'services';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [hasUserLogged, setHasUserLogged] = useState(null);
+  const [isLogged, setIsLogged] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSignIn = async (email, password) => {
@@ -24,28 +26,41 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleSignUp = async (userData) => {
+    setLoading(true);
     const { data, error } = await AccountService.registerRequest(userData);
-    debugger; // eslint-disable-line
+    setLoading(false);
+
     return { data, error };
   };
 
-  const getUser = useCallback(() => auth.currentUser, []);
+  const getUser = useCallback(async () => auth.currentUser, []);
+
+  const getUserExtraInfo = useCallback(async (userId) => {
+    if (!userId) return;
+    // TODO: move this to queries/helpers later
+    const colRef = collection(db, 'users_information');
+    const result = await getDoc(doc(colRef, userId));
+
+    return result.data();
+  }, []);
 
   const valueToProvider = useMemo(
     () => ({
       onSignIn: handleSignIn,
       onSignOut: handleSignOut,
       onSignUp: handleSignUp,
-      getUser,
-      hasUserLogged,
+      isLogged,
       loading,
+      getUser,
+      getUserExtraInfo,
     }),
-    [getUser, hasUserLogged, loading]
+    [isLogged, loading, getUser, getUserExtraInfo]
   );
 
-  const checkUserLogged = async () => {
-    const isUserLogged = await AccountService.onAuthStateInit();
-    setHasUserLogged(isUserLogged);
+  const checkUserLogged = () => {
+    onAuthStateChanged(auth, (user) => {
+      setIsLogged(Boolean(user));
+    });
   };
 
   useEffect(() => {

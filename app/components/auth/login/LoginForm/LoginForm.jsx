@@ -11,12 +11,11 @@ import Colors from 'utils/colors';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  const { onSignIn } = useAuth();
+  const { onSignIn, loading } = useAuth();
   const toast = useToast();
   const navigation = useNavigation();
 
@@ -28,10 +27,7 @@ const LoginForm = () => {
   const handleOnPressIcon = () => setShowPassword(!showPassword);
 
   const handleLogin = async () => {
-    setLoading(true);
     const { error } = await onSignIn(formData.email, formData.password);
-    setLoading(false);
-
     if (!error) {
       return navigation.navigate('account');
     }
