@@ -1,6 +1,16 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React, { useState } from 'react';
-import { View, Input, Icon, Button, Text, useToast } from 'native-base';
+import { Platform } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Input,
+  Icon,
+  Button,
+  Text,
+  useToast,
+  KeyboardAvoidingView,
+} from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -54,117 +64,119 @@ const RegisterForm = () => {
   };
 
   return (
-    <View mt={30}>
-      <View mb={3}>
-        <Input
-          placeholder="Email"
-          InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="email-outline" />}
-              size={5}
-              color="#c1c1c1"
-              ml={1}
-            />
-          }
-          h={10}
-          color="#c1c1c1"
-          _focus={{ borderColor: '#34d399' }}
-          onChange={(text) => onChange(text, 'email')}
-        />
-      </View>
-      <View mb={3}>
-        <Input
-          placeholder="Nombre y apellido"
-          InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="account-circle-outline" />}
-              size={5}
-              color="#c1c1c1"
-              ml={1}
-            />
-          }
-          h={10}
-          color="#c1c1c1"
-          _focus={{ borderColor: '#34d399' }}
-          onChange={(text) => onChange(text, 'name')}
-        />
-      </View>
-      <View mb={3}>
-        <Input
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Contraseña"
-          textContentType="oneTimeCode"
-          InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="account-lock-outline" />}
-              color="#c1c1c1"
-              size={5}
-              ml={1}
-            />
-          }
-          InputRightElement={
-            <Icon
-              as={
-                <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
-              }
-              size={5}
-              color="#c1c1c1"
-              mr={1}
-              onPress={handleOnPressIcon('password')}
-            />
-          }
-          h={10}
-          color="#c1c1c1"
-          _focus={{ borderColor: '#34d399' }}
-          onChange={(text) => onChange(text, 'password')}
-        />
-      </View>
-      <View>
-        <Input
-          type={showPasswordRepeated ? 'text' : 'password'}
-          placeholder="Repetir contraseña"
-          textContentType="oneTimeCode"
-          InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="account-lock-outline" />}
-              color="#c1c1c1"
-              size={5}
-              ml={1}
-            />
-          }
-          InputRightElement={
-            <Icon
-              as={
-                <MaterialCommunityIcons
-                  name={showPasswordRepeated ? 'eye-off-outline' : 'eye-outline'}
-                />
-              }
-              size={5}
-              color="#c1c1c1"
-              mr={1}
-              onPress={handleOnPressIcon('passwordRepeated')}
-            />
-          }
-          h={10}
-          color="#c1c1c1"
-          _focus={{ borderColor: '#34d399' }}
-          onChange={(text) => onChange(text, 'passwordRepeated')}
-        />
-      </View>
-      <Button
-        w="100%"
-        mt={10}
-        mb={1}
-        color="white"
-        bgColor={Colors.green}
-        isLoading={loading}
-        onPress={handleRegister}
-      >
-        <Text color="white" bold>
-          Registrarse
-        </Text>
-      </Button>
-    </View>
+    <KeyboardAvoidingView flex={1} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView mt={30}>
+        <View mb={3}>
+          <Input
+            placeholder="Email"
+            InputLeftElement={
+              <Icon
+                as={<MaterialCommunityIcons name="email-outline" />}
+                size={5}
+                color="#c1c1c1"
+                ml={1}
+              />
+            }
+            h={10}
+            color="#c1c1c1"
+            _focus={{ borderColor: '#34d399' }}
+            onChange={(text) => onChange(text, 'email')}
+          />
+        </View>
+        <View mb={3}>
+          <Input
+            placeholder="Nombre y apellido"
+            InputLeftElement={
+              <Icon
+                as={<MaterialCommunityIcons name="account-circle-outline" />}
+                size={5}
+                color="#c1c1c1"
+                ml={1}
+              />
+            }
+            h={10}
+            color="#c1c1c1"
+            _focus={{ borderColor: '#34d399' }}
+            onChange={(text) => onChange(text, 'name')}
+          />
+        </View>
+        <View mb={3}>
+          <Input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Contraseña"
+            textContentType="oneTimeCode"
+            InputLeftElement={
+              <Icon
+                as={<MaterialCommunityIcons name="account-lock-outline" />}
+                color="#c1c1c1"
+                size={5}
+                ml={1}
+              />
+            }
+            InputRightElement={
+              <Icon
+                as={
+                  <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
+                }
+                size={5}
+                color="#c1c1c1"
+                mr={1}
+                onPress={handleOnPressIcon('password')}
+              />
+            }
+            h={10}
+            color="#c1c1c1"
+            _focus={{ borderColor: '#34d399' }}
+            onChange={(text) => onChange(text, 'password')}
+          />
+        </View>
+        <View>
+          <Input
+            type={showPasswordRepeated ? 'text' : 'password'}
+            placeholder="Repetir contraseña"
+            textContentType="oneTimeCode"
+            InputLeftElement={
+              <Icon
+                as={<MaterialCommunityIcons name="account-lock-outline" />}
+                color="#c1c1c1"
+                size={5}
+                ml={1}
+              />
+            }
+            InputRightElement={
+              <Icon
+                as={
+                  <MaterialCommunityIcons
+                    name={showPasswordRepeated ? 'eye-off-outline' : 'eye-outline'}
+                  />
+                }
+                size={5}
+                color="#c1c1c1"
+                mr={1}
+                onPress={handleOnPressIcon('passwordRepeated')}
+              />
+            }
+            h={10}
+            color="#c1c1c1"
+            _focus={{ borderColor: '#34d399' }}
+            onChange={(text) => onChange(text, 'passwordRepeated')}
+          />
+        </View>
+        <Button
+          w="100%"
+          mt={10}
+          mb={1}
+          color="white"
+          bgColor={Colors.green}
+          isLoading={loading}
+          onPress={handleRegister}
+        >
+          <Text color="white" bold>
+            Registrarse
+          </Text>
+        </Button>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

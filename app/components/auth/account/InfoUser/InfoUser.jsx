@@ -10,93 +10,29 @@ import {
   Button,
   Divider,
   Box,
-  // hook
-  useToast,
 } from 'native-base';
-import * as ImagePicker from 'expo-image-picker';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { collection, doc, updateDoc } from 'firebase/firestore';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Asset } from 'expo-asset';
 
-import { storage, db } from 'firebase-initialize';
 import Colors from 'utils/colors';
+import { useUploadImage } from 'hooks';
 import { useBottomSheet } from 'context';
-import { Toast } from 'components/shared';
-import { EditFields } from '../EditFields';
+
+import { EditFields } from './EditFields';
 
 const defaultImage = Asset.fromModule(require('assets/img/avatar-default.jpg')).uri;
 
-// TODO: move constants in other site later
-// const EMAIL_FIELD = 'email';
-// const NAME_FIELD = 'name';
-// const AGE_FIELD = 'age';
-// const WEIGHT_FIELD = 'weight';
-
 const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
-  const [image, setImage] = useState(avatar ?? null);
   const [currentField, setCurrentField] = useState(null);
-  const toast = useToast();
   const { bottomSheetRef } = useBottomSheet();
+  const { onUpload, image } = useUploadImage(userId);
 
-  const imageConfig = {
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    allowsEditing: true,
-    quality: 1,
-    aspect: [4, 3],
-  };
-
-  const uploadImage = async (file, uid) => {
-    const storageRef = ref(storage, `images/${uid}/${file.fileName}`);
-    // convert image to array of bytes
-    const img = await fetch(file.uri);
-    const bytes = await img.blob();
-
-    uploadBytes(storageRef, bytes)
-      .then(async (snapshot) => {
-        const url = await getDownloadURL(snapshot.ref);
-        setImage(url);
-        // TODO: move this to /queries later
-        const colRef = collection(db, 'users_information');
-        await updateDoc(doc(colRef, uid), { avatar: url });
-
-        return toast.show({
-          placement: 'top',
-          // TODO: move the hardcoded messages later
-          render: () => <Toast type="success" message="Imagen actualizada" />,
-        });
-      })
-      .catch(() => {
-        toast.show({
-          placement: 'top',
-          // TODO: move the hardcoded messages later
-          render: () => <Toast type="error" message="Error en la subida de imagen" />,
-        });
-      });
-  };
-
-  const handleOpenGallery = async () => {
-    // TODO: move this to other side later
-    const permissions = await ImagePicker.getMediaLibraryPermissionsAsync();
-    if (!permissions.granted) {
-      const request = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (request.granted) {
-        const result = await ImagePicker.launchImageLibraryAsync(imageConfig);
-        if (!result.cancelled) {
-          await uploadImage(result, userId);
-        }
-      }
-      // TODO: move the hardcoded messages later
-      return toast.show({
-        placement: 'top',
-        render: () => <Toast type="error" message="Problema de permisos" />,
-      });
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync(imageConfig);
-    if (!result.cancelled) {
-      await uploadImage(result, userId);
-    }
+  const avatarImage = image ?? avatar;
+  const fields = {
+    name,
+    email,
+    age,
+    weight,
   };
 
   // form update
@@ -106,8 +42,8 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
   };
 
   const onEdit = (fieldName) => () => {
-    setCurrentField({ name: fieldName, value: '' });
-    console.log('Editing', fieldName);
+    console.log(fields[fieldName]);
+    setCurrentField({ name: fieldName, value: fields[fieldName] });
     bottomSheetRef.current.present();
   };
 
@@ -119,7 +55,7 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
             alignSelf="center"
             size="2xl"
             source={{
-              uri: image ?? defaultImage,
+              uri: avatarImage ?? defaultImage,
             }}
             position="relative"
           />
@@ -129,7 +65,7 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
             position="absolute"
             bottom={-8}
             right={-10}
-            onPress={handleOpenGallery}
+            onPress={onUpload}
             p={2}
           >
             <Icon as={MaterialIcons} name="edit" size={30} color="white" />
@@ -137,10 +73,8 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
         </Container>
         <Flex mt={5} direction="column">
           <Flex direction="row" alignItems="center" justify="space-between">
-            <Flex direction="row">
-              <Text color="white" fontWeight={300} mr={2}>
-                Email:
-              </Text>
+            <Flex direction="row" alignItems="center">
+              <Icon as={MaterialCommunityIcons} name="email-outline" color="white" mr={2} />
               <Text color="emerald.500" bold>
                 {email}
               </Text>
@@ -161,10 +95,8 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
             <Divider my={2} />
           </Box>
           <Flex direction="row" alignItems="center" justify="space-between">
-            <Flex direction="row">
-              <Text color="white" fontWeight={300} mr={2}>
-                Nombre:
-              </Text>
+            <Flex direction="row" alignItems="center">
+              <Icon as={MaterialCommunityIcons} name="account-outline" color="white" mr={2} />
               <Text color="white" bold>
                 {name}
               </Text>
@@ -185,10 +117,8 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
             <Divider my={2} />
           </Box>
           <Flex direction="row" alignItems="center" justify="space-between">
-            <Flex direction="row">
-              <Text color="white" fontWeight={300} mr={2}>
-                Edad:
-              </Text>
+            <Flex direction="row" alignItems="center">
+              <Icon as={MaterialCommunityIcons} name="account-plus-outline" color="white" mr={2} />
               <Text color="white" bold>
                 {`${age ?? 33} años`}
               </Text>
@@ -209,10 +139,8 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
             <Divider my={2} />
           </Box>
           <Flex direction="row" alignItems="center" justify="space-between">
-            <Flex direction="row">
-              <Text color="white" fontWeight={300} mr={2}>
-                Peso:
-              </Text>
+            <Flex direction="row" alignItems="center">
+              <Icon as={MaterialCommunityIcons} name="weight" color="white" mr={2} />
               <Text color="white" bold>
                 {`${weight ?? 69} kg`}
               </Text>

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React, { useState } from 'react';
-import { View, Text, Input, Icon, Button, useToast } from 'native-base';
+import { View, Text, Input, Icon, Button, useToast, KeyboardAvoidingView } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -40,65 +40,66 @@ const LoginForm = () => {
 
   return (
     <View mt={30}>
-      <View mb={3}>
-        <Input
-          placeholder="Email"
-          InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="email-outline" />}
-              size={5}
-              color="#c1c1c1"
-              ml={1}
-            />
-          }
-          h={10}
-          color="#c1c1c1"
-          _focus={{ borderColor: '#34d399' }}
-          onChange={(text) => onChange(text, 'email')}
-        />
-        {/* <Text style={styles.errorMessage}>sd</Text> */}
-      </View>
-      <View>
-        <Input
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Contraseña"
-          InputLeftElement={
-            <Icon
-              as={<MaterialCommunityIcons name="account-lock-outline" />}
-              color="#c1c1c1"
-              size={5}
-              ml={1}
-            />
-          }
-          InputRightElement={
-            <Icon
-              as={
-                <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
-              }
-              size={5}
-              color="#c1c1c1"
-              mr={1}
-              onPress={handleOnPressIcon}
-            />
-          }
-          h={10}
-          color="#c1c1c1"
-          _focus={{ borderColor: '#34d399' }}
-          onChange={(text) => onChange(text, 'password')}
-        />
-      </View>
-      <Button
-        mt={10}
-        mb={1}
-        w="100%"
-        bgColor={Colors.green}
-        onPress={handleLogin}
-        isLoading={loading}
-      >
-        <Text color="white" bold>
-          Iniciar sesión
-        </Text>
-      </Button>
+      <KeyboardAvoidingView>
+        <View mb={3}>
+          <Input
+            placeholder="Email"
+            InputLeftElement={
+              <Icon
+                as={<MaterialCommunityIcons name="email-outline" />}
+                size={5}
+                color="#c1c1c1"
+                ml={1}
+              />
+            }
+            h={10}
+            color="#c1c1c1"
+            _focus={{ borderColor: '#34d399' }}
+            onChange={(text) => onChange(text, 'email')}
+          />
+        </View>
+        <View>
+          <Input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Contraseña"
+            InputLeftElement={
+              <Icon
+                as={<MaterialCommunityIcons name="account-lock-outline" />}
+                color="#c1c1c1"
+                size={5}
+                ml={1}
+              />
+            }
+            InputRightElement={
+              <Icon
+                as={
+                  <MaterialCommunityIcons name={showPassword ? 'eye-off-outline' : 'eye-outline'} />
+                }
+                size={5}
+                color="#c1c1c1"
+                mr={1}
+                onPress={handleOnPressIcon}
+              />
+            }
+            h={10}
+            color="#c1c1c1"
+            _focus={{ borderColor: '#34d399' }}
+            onChange={(text) => onChange(text, 'password')}
+          />
+        </View>
+        <Button
+          mt={10}
+          mb={1}
+          w="100%"
+          bgColor={Colors.green}
+          onPress={handleLogin}
+          isLoading={loading}
+        >
+          <Text color="white" bold>
+            Iniciar sesión
+          </Text>
+        </Button>
+      </KeyboardAvoidingView>
     </View>
   );
 };

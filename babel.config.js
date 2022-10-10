@@ -17,6 +17,7 @@ module.exports = function (api) {
             context: './app/context',
             queries: './app/queries',
             hooks: './app/hooks',
+            lang: './app/lang',
             'firebase-initialize': './firebase.init',
           },
         },

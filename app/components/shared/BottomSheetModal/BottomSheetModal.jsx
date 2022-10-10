@@ -1,3 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-native/no-color-literals */
+/* eslint-disable react-native/no-inline-styles */
+
 import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -5,14 +9,15 @@ import {
   BottomSheetBackdrop,
 } from '@gorhom/bottom-sheet';
 
+import Colors from 'utils/colors';
+
 const BottomSheetModal = ({ bottomSheetModalRef, children }) => {
-  /* eslint-disable react-hooks/exhaustive-deps */
-  const snapPoints = useMemo(() => ['40%'], []);
+  const snapPoints = useMemo(() => ['75%'], []);
 
   const renderBackdrop = useCallback(
     (props) => (
       // eslint-disable-next-line react/jsx-props-no-spreading
-      <BottomSheetBackdrop opacity={0.7} disappearsOnIndex={-1} appearsOnIndex={0} {...props} />
+      <BottomSheetBackdrop opacity={0.5} disappearsOnIndex={-1} appearsOnIndex={0} {...props} />
     ),
     []
   );
@@ -23,7 +28,21 @@ const BottomSheetModal = ({ bottomSheetModalRef, children }) => {
       index={0}
       snapPoints={snapPoints}
       backdropComponent={renderBackdrop}
-      backgroundStyle={{ backgroundColor: 'grey' }}
+      keyboardBehavior="extend"
+      keyboardBlurBehavior="restore"
+      // TODO: review why cannot use native base theme here
+      backgroundStyle={{
+        backgroundColor: Colors.zircon,
+        shadowColor: Colors.charade,
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+      }}
     >
       {children}
     </GorhomBottomSheetModal>

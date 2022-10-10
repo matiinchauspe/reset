@@ -11,7 +11,9 @@ import { Logo } from 'components/shared';
 const UserGuest = () => {
   const navigation = useNavigation();
 
-  const goToProfile = () => navigation.navigate('login');
+  const goToProfile = () => {
+    navigation.navigate('login');
+  };
 
   return (
     <View height="100%" backgroundColor={Colors.zircon}>
