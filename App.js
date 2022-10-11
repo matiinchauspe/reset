@@ -1,10 +1,10 @@
 import React from 'react';
 import { NativeBaseProvider, Box } from 'native-base';
 
-import { AuthProvider } from 'context';
 import { usePreloadResources } from 'hooks';
 import { theme } from 'utils/styles';
-import { BottomSheetProvider } from 'components/shared';
+
+import { AuthProvider, BottomSheetProvider } from 'components/shared';
 import Navigation from './app/navigations';
 
 const App = () => {

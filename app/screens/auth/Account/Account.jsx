@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useAuth } from 'context';
-
+import { useAuth } from 'hooks';
 import { LoadingSection } from 'components/shared';
 import { UserGuest } from './UserGuest';
 import { UserLogged } from './UserLogged';

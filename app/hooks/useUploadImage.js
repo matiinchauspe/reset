@@ -1,7 +1,7 @@
 // Image functionality hook
 import React, { useState } from 'react';
 import { useToast } from 'native-base';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { collection, doc, updateDoc } from 'firebase/firestore';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -25,7 +25,7 @@ export const useUploadImage = (userId) => {
     const img = await fetch(file.uri);
     const bytes = await img.blob();
 
-    uploadBytes(storageRef, bytes)
+    uploadBytesResumable(storageRef, bytes)
       .then(async (snapshot) => {
         const url = await getDownloadURL(snapshot.ref);
         setImage(url);

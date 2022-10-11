@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Center } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
-import { useAuth } from 'context';
+import { useAuth } from 'hooks';
 import Colors from 'utils/colors';
 
 import { InfoUser } from 'components/auth/account';
