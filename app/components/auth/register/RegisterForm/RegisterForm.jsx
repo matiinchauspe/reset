@@ -14,10 +14,10 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-import { useAuth } from 'hooks';
-import { Toast } from 'components/shared';
+import { useAuth } from '@hooks';
+import { Toast } from '@components/shared';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);

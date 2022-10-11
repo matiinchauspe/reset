@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome5 as Icon } from '@expo/vector-icons';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
 import HomeNavigation from './home.navigation';
 import ResetNavigation from './reset.navigation';

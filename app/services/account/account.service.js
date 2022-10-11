@@ -1,11 +1,9 @@
 // @Firebase authentication service
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
-// TODO: remove this from here later
-import { collection, doc, setDoc } from 'firebase/firestore';
 
-import { auth, db } from 'firebase-initialize';
-import errorFactory from 'utils/errors/responseFactory';
-// import * as AccountTransform from './account.transform';
+import { auth } from '@firebase-utils/firebase.init';
+import { Queries, Constants as FBConstants } from '@firebase-utils';
+import errorFactory from '@utils/errors/responseFactory';
 
 // @handlers
 const loginRequest = async (email, password) => {
@@ -24,9 +22,12 @@ const registerRequest = async ({ email, passwordRepeated: password, ...restUserD
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const { user } = userCredential;
-    const colRef = collection(db, 'users_information');
 
-    await setDoc(doc(colRef, user.uid), { name: restUserData.name });
+    await Queries.setDocument({
+      collectionName: FBConstants.COLLECTION_NAMES.USERS,
+      id: user.uid,
+      dataToReplace: { name: restUserData.name },
+    });
 
     return { data: 'success', error: null };
   } catch (error) {

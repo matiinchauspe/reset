@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, ScrollView, Divider, Box } from 'native-base';
 
-import { LoginForm, SocialMedia } from 'components/auth/login';
-import { Logo, LinkIntoText } from 'components/shared';
+import { LoginForm, SocialMedia } from '@components/auth/login';
+import { Logo, LinkIntoText } from '@components/shared';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
 import styles from './Login.styles';
 

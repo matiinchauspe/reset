@@ -2,19 +2,19 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "app": ["./app/*"],
-      "components": ["./app/components/*"],
-      "assets": ["./assets/*"],
-      "navigations": ["./app/navigations"],
-      "screens": ["./app/screens"],
-      "stacks": ["./app/stacks"],
-      "utils": ["./app/utils"],
-      "services": ["./app/services"],
-      "context": ["./app/context"],
-      "queries": ["./app/queries"],
-      "hooks": ["./app/hooks"],
-      "lang": ["./app/lang"],
-      "firebase-initialize": ["./firebase.init"]
+      "@app": ["./app/*"],
+      "@components": ["./app/components/*"],
+      "@assets": ["./assets/*"],
+      "@navigations": ["./app/navigations/*"],
+      "@screens": ["./app/screens/*"],
+      "@stacks": ["./app/stacks/*"],
+      "@utils": ["./app/utils/*"],
+      "@services": ["./app/services/*"],
+      "@context": ["./app/context/*"],
+      "@hooks": ["./app/hooks/*"],
+      "@lang": ["./app/lang/*"],
+      "@firebase-utils": ["./app/firebase/*"]
     }
-  }
+  },
+  "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@ import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { View } from 'native-base';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
-import { BottomSheetProvider as BottomSheetContextProvider } from 'context';
+import { BottomSheetProvider as BottomSheetContextProvider } from '@context';
 
 const BottomSheetProvider = ({ children }) => {
   const [data, setData] = useState(null);

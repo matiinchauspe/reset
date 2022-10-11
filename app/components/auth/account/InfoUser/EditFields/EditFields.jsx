@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Input, Button, Text, Stack, VStack, Icon } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { useBottomSheet } from 'hooks';
-import LangKey from 'lang/lang.es';
+import { useBottomSheet } from '@hooks';
+import LangKey from '@lang/lang.es';
 
-import { BottomSheetModal } from 'components/shared';
+import { BottomSheetModal } from '@components/shared';
 import IconInput from './IconInputFactory';
 
 const EditFields = ({ field, onChangeField }) => {

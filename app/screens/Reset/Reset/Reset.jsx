@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IncomingSection } from 'components/shared';
+import { IncomingSection } from '@components/shared';
 
 const Reset = () => {
   return <IncomingSection />;

@@ -4,10 +4,10 @@ import { View, Text, Input, Icon, Button, useToast, KeyboardAvoidingView } from 
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { useAuth } from 'hooks';
-import { Toast } from 'components/shared';
+import { useAuth } from '@hooks';
+import { Toast } from '@components/shared';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);

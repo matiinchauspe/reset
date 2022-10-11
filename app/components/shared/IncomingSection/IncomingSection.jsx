@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Center, Box, Text } from 'native-base';
 
-import Colors from 'utils/colors';
-import { Logo } from 'components/shared/Logo';
+import Colors from '@utils/colors';
+import { Logo } from '@components/shared/Logo';
 
 const IncomingSection = () => (
   <View height="100%" backgroundColor={Colors.zircon}>

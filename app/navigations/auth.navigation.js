@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
-import { Account, Login, Register } from 'screens/auth';
+import { Account, Login, Register } from '@screens/auth';
 
 const Stack = createNativeStackNavigator();
 

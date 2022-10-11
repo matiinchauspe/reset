@@ -5,8 +5,8 @@ import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from 'firebase
 import { collection, doc, updateDoc } from 'firebase/firestore';
 import * as ImagePicker from 'expo-image-picker';
 
-import { storage, db } from 'firebase-initialize';
-import { Toast } from 'components/shared';
+import { storage, db } from '@firebase-utils/firebase.init';
+import { Toast } from '@components/shared';
 
 export const useUploadImage = (userId) => {
   const [image, setImage] = useState(null);

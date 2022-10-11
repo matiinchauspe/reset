@@ -9,7 +9,7 @@ import {
   BottomSheetBackdrop,
 } from '@gorhom/bottom-sheet';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
 const BottomSheetModal = ({ bottomSheetModalRef, children }) => {
   const snapPoints = useMemo(() => ['75%'], []);

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
 const LinkIntoText = ({ text, linkText, sectionToGo }) => {
   const navigation = useNavigation();

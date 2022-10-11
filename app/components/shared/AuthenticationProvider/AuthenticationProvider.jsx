@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-
-import { collection, doc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
-import { AuthProvider } from 'context';
-import { auth, db } from 'firebase-initialize';
-import { AccountService } from 'services';
+import { AuthProvider } from '@context';
+import { auth } from '@firebase-utils/firebase.init';
+import { Queries, Constants } from '@firebase-utils';
+import { AccountService, AccountTransform } from '@services';
 
 const AuthenticationProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(null);
@@ -35,14 +34,19 @@ const AuthenticationProvider = ({ children }) => {
 
   const getUser = useCallback(async () => auth.currentUser, []);
 
-  const getUserExtraInfo = useCallback(async (userId) => {
-    if (!userId) return;
-    // TODO: move this to queries/helpers later
-    const colRef = collection(db, 'users_information');
-    const result = await getDoc(doc(colRef, userId));
+  const getUserData = useCallback(async () => {
+    const currentUser = await getUser();
+    if (!currentUser) return;
 
-    return result.data();
-  }, []);
+    const currentUserExtraData = await Queries.getDocument({
+      collectionName: Constants.COLLECTION_NAMES.USERS,
+      id: currentUser.uid,
+    });
+    const userData = { ...currentUser, ...currentUserExtraData };
+
+    // Transform and return the information
+    return AccountTransform.UserResponseTransform(userData);
+  }, [getUser]);
 
   const valueToProvider = useMemo(
     () => ({
@@ -51,10 +55,9 @@ const AuthenticationProvider = ({ children }) => {
       onSignUp: handleSignUp,
       isLogged,
       loading,
-      getUser,
-      getUserExtraInfo,
+      getUserData,
     }),
-    [isLogged, loading, getUser, getUserExtraInfo]
+    [isLogged, loading, getUserData]
   );
 
   const checkUserLogged = () => {

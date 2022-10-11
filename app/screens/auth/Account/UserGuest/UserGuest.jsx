@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Center, Button, Box, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
-import Colors from 'utils//colors';
-import { Logo } from 'components/shared';
+import Colors from '@utils//colors';
+import { Logo } from '@components/shared';
 
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable  react-native/no-raw-text */

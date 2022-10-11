@@ -14,14 +14,14 @@ import {
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Asset } from 'expo-asset';
 
-import Colors from 'utils/colors';
-import { useUploadImage, useBottomSheet } from 'hooks';
+import Colors from '@utils/colors';
+import { useUploadImage, useBottomSheet } from '@hooks';
 
 import { EditFields } from './EditFields';
 
-const defaultImage = Asset.fromModule(require('assets/img/avatar-default.jpg')).uri;
+const defaultImage = Asset.fromModule(require('@assets/img/avatar-default.jpg')).uri;
 
-const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
+const InfoUser = ({ userInfo: { userId, name, email, age, weight, avatar } }) => {
   const [currentField, setCurrentField] = useState(null);
   const { bottomSheetRef } = useBottomSheet();
   const { onUpload, image } = useUploadImage(userId);
@@ -119,7 +119,7 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
             <Flex direction="row" alignItems="center">
               <Icon as={MaterialCommunityIcons} name="account-plus-outline" color="white" mr={2} />
               <Text color="white" bold>
-                {`${age ?? 33} años`}
+                {age}
               </Text>
             </Flex>
             <Button
@@ -141,7 +141,7 @@ const InfoUser = ({ userId, name, email, age, weight, avatar }) => {
             <Flex direction="row" alignItems="center">
               <Icon as={MaterialCommunityIcons} name="weight" color="white" mr={2} />
               <Text color="white" bold>
-                {`${weight ?? 69} kg`}
+                {weight}
               </Text>
             </Flex>
             <Button

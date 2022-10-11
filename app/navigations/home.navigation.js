@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Colors from 'utils/colors';
+import Colors from '@utils/colors';
 
-import { Home } from 'screens/home';
+import { Home } from '@screens/home';
 
 const Stack = createNativeStackNavigator();
 

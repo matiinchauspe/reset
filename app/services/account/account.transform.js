@@ -2,13 +2,16 @@
 
 // Register request transform
 const UserRequestTransform = (userRequestData) => {
-  debugger; // eslint-disable-line
   return userRequestData;
 };
 
-const UserResponseTransform = (userResponseData) => {
-  debugger; // eslint-disable-line
-  return userResponseData;
-};
+const UserResponseTransform = ({ uid, email, name, age, weight, avatar }) => ({
+  userId: uid,
+  email,
+  name,
+  avatar,
+  age: `${age ?? '-'} años`,
+  weight: `${weight ?? '-'} kg`,
+});
 
 export { UserRequestTransform, UserResponseTransform };

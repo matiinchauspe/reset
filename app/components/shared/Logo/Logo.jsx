@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image } from 'native-base';
 import { Asset } from 'expo-asset';
 
-const imageURI = Asset.fromModule(require('assets/img/logo.png'));
+const imageURI = Asset.fromModule(require('@assets/img/logo.png'));
 
 const Logo = () => (
   <View>
