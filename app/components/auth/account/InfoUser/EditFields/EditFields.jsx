@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Input, Button, Text, Stack, VStack, Icon } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { useBottomSheet } from 'context';
+import { useBottomSheet } from 'hooks';
 import LangKey from 'lang/lang.es';
 
 import { BottomSheetModal } from 'components/shared';

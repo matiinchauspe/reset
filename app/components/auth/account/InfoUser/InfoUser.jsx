@@ -15,8 +15,7 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Asset } from 'expo-asset';
 
 import Colors from 'utils/colors';
-import { useUploadImage } from 'hooks';
-import { useBottomSheet } from 'context';
+import { useUploadImage, useBottomSheet } from 'hooks';
 
 import { EditFields } from './EditFields';
 

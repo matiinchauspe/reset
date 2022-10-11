@@ -4,3 +4,4 @@ export * from './Logo';
 export * from './LinkIntoText';
 export * from './IncomingSection';
 export * from './BottomSheetModal';
+export * from './BottomSheetProvider';
