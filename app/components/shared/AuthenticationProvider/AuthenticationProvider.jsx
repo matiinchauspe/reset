@@ -18,6 +18,11 @@ const AuthenticationProvider = ({ children }) => {
     return { data, error };
   };
 
+  const handleSignInWithFacebook = async () => {
+    const result = await AccountService.loginWithFacebookRequest();
+    debugger; // eslint-disable-line
+  };
+
   const handleSignOut = async () => {
     setLoading(true);
     await AccountService.logoutRequest();
@@ -51,6 +56,7 @@ const AuthenticationProvider = ({ children }) => {
   const valueToProvider = useMemo(
     () => ({
       onSignIn: handleSignIn,
+      onSignInThroughFB: handleSignInWithFacebook,
       onSignOut: handleSignOut,
       onSignUp: handleSignUp,
       isLogged,
