@@ -19,8 +19,10 @@ const AuthenticationProvider = ({ children }) => {
   };
 
   const handleSignInWithFacebook = async () => {
-    const result = await AccountService.loginWithFacebookRequest();
+    const { data, error } = await AccountService.loginWithFacebookRequest();
     debugger; // eslint-disable-line
+
+    return { data, error };
   };
 
   const handleSignOut = async () => {

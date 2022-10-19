@@ -4,15 +4,18 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   sendEmailVerification,
+  signInWithRedirect,
+  getRedirectResult,
+  FacebookAuthProvider,
 } from 'firebase/auth';
-import * as Facebook from 'expo-facebook';
+// import * as Facebook from 'expo-facebook';
 
-import { auth } from '@firebase-utils/firebase.init';
+import { auth, fbProvider } from '@firebase-utils/firebase.init';
 import { Queries, Constants as FBConstants } from '@firebase-utils';
 import errorFactory from '@utils/errors/responseFactory';
-import { URLs, FACEBOOK_PERMISSIONS } from '../constants';
+// import { URLs, FACEBOOK_PERMISSIONS } from '../constants';
 
-const { FACEBOOK_APP_ID } = process.env;
+// const { FACEBOOK_APP_ID } = process.env;
 
 // @handlers
 const loginRequest = async (email, password) => {
@@ -59,23 +62,30 @@ const registerRequest = async ({ email, passwordRepeated: password, ...restUserD
 // @Facebook
 const loginWithFacebookRequest = async () => {
   try {
-    await Facebook.initializeAsync({
-      appId: FACEBOOK_APP_ID,
-    });
-    const { type, token, expirationDate, permissions, declinedPermissions } =
-      await Facebook.logInWithReadPermissionsAsync({
-        permissions: FACEBOOK_PERMISSIONS,
-      });
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(URLs.replace(':token:', token));
+    debugger; // eslint-disable-line
+    return signInWithRedirect(auth, fbProvider);
+    debugger; // eslint-disable-line
+    // This will trigger a full page redirect away from your app
+    // After returning from the redirect when your app initializes you can obtain the result
+    const result = await getRedirectResult(auth);
+    if (result) {
       debugger; // eslint-disable-line
-      alert('Logged in!', `Hi ${(await response.json()).name}!`);
-    } else {
-      // type === 'cancel'
+      // This is the signed-in user
+      const { user } = result;
+      // This gives you a Facebook Access Token.
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      return {
+        data: user,
+        error: null,
+      };
     }
-  } catch ({ message }) {
-    alert(`Facebook Login Error: ${message}`);
+  } catch (error) {
+    alert(`Facebook Login Error: ${error.message}`);
+    return {
+      data: null,
+      error: errorFactory({ errorCode: error.code }),
+    };
   }
 };
 
