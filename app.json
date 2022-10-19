@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "resetApp",
-    "slug": "resetApp",
-    "version": "1.0.0",
+    "owner": "thesameasusual",
+    "name": "Reset",
+    "slug": "reset-app",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -15,14 +16,16 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.thesameasusual.reset-app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.minchauspe.resetApp"
+      "package": "com.thesameasusual.reset-app",
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "favicon": "./assets/icon.png"
@@ -34,13 +37,12 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ],
-      [
-        "expo-facebook",
-        {
-          "userTrackingPermission": false
-        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2323fa38-6876-4b26-99a7-02df638df95c"
+      }
+    }
   }
 }

@@ -60,33 +60,33 @@ const registerRequest = async ({ email, passwordRepeated: password, ...restUserD
 };
 
 // @Facebook
-const loginWithFacebookRequest = async () => {
-  try {
-    debugger; // eslint-disable-line
-    return signInWithRedirect(auth, fbProvider);
-    debugger; // eslint-disable-line
-    // This will trigger a full page redirect away from your app
-    // After returning from the redirect when your app initializes you can obtain the result
-    const result = await getRedirectResult(auth);
-    if (result) {
-      debugger; // eslint-disable-line
-      // This is the signed-in user
-      const { user } = result;
-      // This gives you a Facebook Access Token.
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      return {
-        data: user,
-        error: null,
-      };
-    }
-  } catch (error) {
-    alert(`Facebook Login Error: ${error.message}`);
-    return {
-      data: null,
-      error: errorFactory({ errorCode: error.code }),
-    };
-  }
-};
+// const loginWithFacebookRequest = async () => {
+//   try {
+//     debugger; // eslint-disable-line
+//     return signInWithRedirect(auth, fbProvider);
+//     debugger; // eslint-disable-line
+//     // This will trigger a full page redirect away from your app
+//     // After returning from the redirect when your app initializes you can obtain the result
+//     const result = await getRedirectResult(auth);
+//     if (result) {
+//       debugger; // eslint-disable-line
+//       // This is the signed-in user
+//       const { user } = result;
+//       // This gives you a Facebook Access Token.
+//       const credential = FacebookAuthProvider.credentialFromResult(result);
+//       const token = credential.accessToken;
+//       return {
+//         data: user,
+//         error: null,
+//       };
+//     }
+//   } catch (error) {
+//     alert(`Facebook Login Error: ${error.message}`);
+//     return {
+//       data: null,
+//       error: errorFactory({ errorCode: error.code }),
+//     };
+//   }
+// };
 
-export { loginRequest, logoutRequest, registerRequest, loginWithFacebookRequest };
+export { loginRequest, logoutRequest, registerRequest };
