@@ -8,7 +8,6 @@ import {
   getRedirectResult,
   FacebookAuthProvider,
 } from 'firebase/auth';
-// import * as Facebook from 'expo-facebook';
 
 import { auth, fbProvider } from '@firebase-utils/firebase.init';
 import { Queries, Constants as FBConstants } from '@firebase-utils';
