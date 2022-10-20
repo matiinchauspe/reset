@@ -8,7 +8,10 @@
     "eject": "expo eject",
     "lint": "eslint ./app",
     "lint:fix": "eslint ./app --fix",
-    "clean-cache": "yarn start -c"
+    "prettier:fix": "prettier --write",
+    "prettier:check": "prettier --check .",
+    "clean-cache": "yarn start -c",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@expo/metro-config": "^0.3.22",
@@ -53,6 +56,8 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-native": "^4.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.5.1"
   },
   "private": true

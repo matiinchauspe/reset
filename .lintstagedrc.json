@@ -1,0 +1,3 @@
+{
+  "app/**/*.{js,jsx}": ["yarn prettier:fix", "yarn lint"]
+}
