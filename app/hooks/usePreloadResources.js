@@ -2,21 +2,21 @@
 import { useEffect, useCallback, useState } from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-// import { Asset } from 'expo-asset';
+import { Asset } from 'expo-asset';
 
-// const openSansLight = Asset.fromModule(require('@assets/fonts/open-sans/OpenSans-Light.ttf'));
-// const openSansRegular = Asset.fromModule(require('@assets/fonts/open-sans/OpenSans-Regular.ttf'));
-// const openSansBold = Asset.fromModule(require('@assets/fonts/open-sans/OpenSans-Bold.ttf'));
-// const openSansExtraBold = Asset.fromModule(
-//   require('@assets/fonts/open-sans/OpenSans-ExtraBold.ttf')
-// );
+const openSansLight = Asset.fromModule(require('@assets/fonts/open-sans/OpenSans-Light.ttf'));
+const openSansRegular = Asset.fromModule(require('@assets/fonts/open-sans/OpenSans-Regular.ttf'));
+const openSansBold = Asset.fromModule(require('@assets/fonts/open-sans/OpenSans-Bold.ttf'));
+const openSansExtraBold = Asset.fromModule(
+  require('@assets/fonts/open-sans/OpenSans-ExtraBold.ttf')
+);
 
 const prepareResources = async () => {
   await Font.loadAsync({
-    'font-open-sans-light': require('@assets/fonts/open-sans/OpenSans-Light.ttf'),
-    'font-open-sans': require('@assets/fonts/open-sans/OpenSans-Regular.ttf'),
-    'font-open-sans-bold': require('@assets/fonts/open-sans/OpenSans-Bold.ttf'),
-    'font-open-sans-extra-bold': require('@assets/fonts/open-sans/OpenSans-ExtraBold.ttf'),
+    'font-open-sans-light': openSansLight,
+    'font-open-sans': openSansRegular,
+    'font-open-sans-bold': openSansBold,
+    'font-open-sans-extra-bold': openSansExtraBold,
   });
 };
 
